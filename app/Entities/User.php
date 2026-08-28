@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Models\PlayerModel;
 use CodeIgniter\Shield\Entities\User as ShieldUser;
 class User extends ShieldUser
 {
@@ -10,8 +11,8 @@ class User extends ShieldUser
     public function getPlayer(): ?Player {
         if($this->player === null && ($this->attributes['id'])) {
             $playerModel = model(PlayerModel::class);
-            $this->player = $playerModel->findByUser($this->attributes['id']);
-            if (!$this->player) {
+            $this->player = $playerModel->findByUserId($this->attributes['id']);
+            if ($this->player) {
                 $this->player->setUser($this);
             }
         }

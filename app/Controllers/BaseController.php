@@ -36,6 +36,7 @@ abstract class BaseController extends Controller
     protected $author = "";
     protected $keywords = "";
     protected $current_menu = "";
+    protected $layout = "front";
 
     /**
      * @return void
@@ -69,6 +70,8 @@ abstract class BaseController extends Controller
             'keywords' => $this->keywords,
             'menus' => $this->loadMenu(),
             'current_menu' => $this->current_menu,
+            'user' => auth()->user(),
+            'layout' => $this->layout,
         ];
 
         return view('template/head', $headData).view($view, $datas,$options).view('template/footer', ['messages' => $this->messages]);
@@ -76,7 +79,7 @@ abstract class BaseController extends Controller
 
     protected function loadMenu() {
         $filename = APPPATH . "Config";
-        $filename .= "/menu.json";
+        $filename .= "/menu-{$this->layout}.json";
 
         if(!file_exists($filename)) {
             log_message("error", "Menu file not found");

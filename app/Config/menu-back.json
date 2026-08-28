@@ -1,0 +1,15 @@
+{
+  "employe" : {
+    "title" : "Menu",
+    "icon" : "<i class=\"fa-solid fa-user-tie\"></i>",
+    "class": "",
+    "subs" : {
+      "creation" : {
+        "title" : "Sous menu",
+        "url" : "/sous menu",
+        "icon" : "<i class=\"fa-solid fa-user-tie\"></i>",
+        "class": ""
+      }
+    }
+  }
+}
