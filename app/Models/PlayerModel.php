@@ -10,7 +10,7 @@ class PlayerModel extends Model
     protected $table            = 'players';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'Player::class';
+    protected $returnType       = Player::class;
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
