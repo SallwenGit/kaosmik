@@ -4,7 +4,7 @@
             <div class="card-body p-3">
                 <div class="text-center mb-3">
                     <h3 class="fw-bold">Connexion</h3>
-                    <p class="text-muted small">Retourner voir votre Ã©quipage</p>
+                    <p class="text-muted small">Retourner voir votre équipage</p>
                 </div>
 
                 <?php if (session('error') !== null) : ?>
@@ -40,7 +40,7 @@
                         <label for="floatingPasswordInput" class="form-label"><?= lang('Auth.password') ?></label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-                            <input type="password" class="form-control" name="password" id="floatingPasswordInput" inputmode="text" autocomplete="current-password" placeholder="Mot de passe" data-toggle="password" required>
+                            <input type="password" class="form-control" name="password" id="floatingPasswordInput" inputmode="text" autocomplete="current-password" placeholder="Mot de passe" required>
                         </div>
                     </div>
 
