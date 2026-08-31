@@ -15,4 +15,10 @@ $routes->get('logout', [AuthController::class, 'logoutAction']);
 //Routes pour l'administration
 $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'group:admin'], function ($routes) {
     $routes->get('/', 'AdminController::index');
+    $routes->group('user', function ($routes) {
+        $routes->get('/', 'UserController::index');
+        $routes->get('edit/(:num)', 'UserController::edit/$1');
+        $routes->post('update', 'UserController::update');
+        $routes->post('create', 'UserController::create');
+    });
 });
