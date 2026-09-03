@@ -39,12 +39,13 @@ if (isset($user)) {
                 </div>
                 <div>
                     <label class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" name="active">
+                        <input class="form-check-input" type="checkbox" name="active" <?= isset($user) && !$user->active ? "" : "checked"; ?>>
                         <span class="form-check-label">Actif</span>
                     </label>
                 </div>
             </div>
         </div>
+        <?php if (isset($user) && $user->getPlayer() !== null) : ?>
         <div class="card">
             <div class="card-header">Informations joueur(s)</div>
             <div class="card-body">
@@ -91,10 +92,12 @@ if (isset($user)) {
                 </div>
             </div>
         </div>
+        <?php endif; ?>
     </div>
     <div class="col-md-3">
         <div class="card h-100">
             <div class="card-body">
+                <?php if(isset($user)) : ?>
                 <div class="d-flex justify-content-between">
                     <div>Crée le :</div>
                     <div>
@@ -107,6 +110,7 @@ if (isset($user)) {
                         <i class="fa-regular fa-clock me-1"></i><?= format_date_fr($user->updated_at); ?>
                     </div>
                 </div>
+                <?php endif; ?>
                 <div class="d-grid">
                     <?php if(isset($user)) :
                         echo form_hidden('id', (string) $user->id);
