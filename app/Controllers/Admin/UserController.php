@@ -53,6 +53,7 @@ class UserController extends BaseController
     private $userModel;
     private $playerModel;
 
+    protected $current_menu = 'user';
     /**
      * CONSTRUCTEUR
      *

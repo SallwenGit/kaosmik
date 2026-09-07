@@ -10,5 +10,11 @@
     "url" : "/admin/level-threshold",
     "icon" : "<i class=\"fa-solid fa-gear\"></i>",
     "class": ""
+  },
+  "rarity_level" : {
+    "title" : "Raretés",
+    "url" : "/admin/rarity_level",
+    "icon" : "<i class=\"fa-solid fa-star\"></i>",
+    "class": ""
   }
   }
