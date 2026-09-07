@@ -28,4 +28,11 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'gr
         $routes->post('create', 'LevelThresholdController::create');
         $routes->post('delete', 'LevelThresholdController::delete');
     });
+
+    $routes->group('rarity-level', function ($routes) {
+        $routes->get('/', 'RarityLevelController::index');
+        $routes->post('update', 'RarityLevelController::update');
+        $routes->post('create', 'RarityLevelController::create');
+        $routes->post('delete', 'RarityLevelController::delete');
+    });
 });
