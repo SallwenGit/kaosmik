@@ -1,7 +1,7 @@
 {
-  "animal" : {
-    "title" : "Test",
-    "url" : "/admin/user/new",
+  "cantina" : {
+    "title" : "Recruter",
+    "url" : "/cantina",
     "icon" : "",
     "class": ""
   }
