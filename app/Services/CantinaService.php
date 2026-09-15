@@ -7,6 +7,7 @@ use App\Models\HeroModelModel;
 use App\Models\HeroNameModel;
 use App\Models\PlayerModel;
 use App\Models\RarityLevelModel;
+use CodeIgniter\I18n\Time;
 
 class CantinaService
 {
@@ -21,6 +22,22 @@ class CantinaService
         $this->heroModelModel = model(HeroModelModel::class );
         $this->rarityModel = model(RarityLevelModel::class );
         $this->heroNameModel = model(HeroNameModel::class );
+    }
+
+    public function getOrGenerateOffers(int $playerId, int $number = 3): array {
+        $offers = $this->cantinaModel->where('player_id', $playerId)->findAll();
+        if(!empty($offers)) {
+            $hour = $offers[0]->created_at;
+            if($hour != null) {
+                $createdTime = Time::parse($hour);
+                $now = Time::now();
+                $diff = $createdTime->difference($now)->getHours();
+                if($diff < 12) {
+                    return $offers;
+                }
+            }
+        }
+        return $this->generateOffers($playerId, $number);
     }
 
     public function generateOffers(int $playerId, int $number = 3) : array {
@@ -62,5 +79,11 @@ class CantinaService
         }
 
         return $this->cantinaModel->where('player_id', $playerId)->findAll();
+    }
+
+    public function recrute(int $playerId, int $heroCantinaId) {
+        $cantinaHero = $this->cantinaModel->find($heroCantinaId);
+        print_r($cantinaHero->toRawArray());
+        die();
     }
 }

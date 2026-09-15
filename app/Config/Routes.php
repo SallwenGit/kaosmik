@@ -17,7 +17,10 @@ $routes->get('logout', [AuthController::class, 'logoutAction']);
 $routes->group('', ['filter' => 'session'], function($routes) {
     $routes->group('cantina', function($routes) {
         $routes->get('/', 'CantinaController::index');
+        $routes->post('refresh', 'CantinaController::refresh');
+        $routes->post('recrute/(:num)', 'CantinaController::recrute/$1');
     });
+    //Routes pour le profil
 });
 
 //Routes pour l'administration
@@ -54,7 +57,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'gr
     });
     $routes->group('specialization', function ($routes) {
         $routes->get('/', 'SpecializationController::index');
-        $routes->get('create', 'SpecializationController::create');
+        $routes->post('create', 'SpecializationController::create');
         $routes->post('update', 'SpecializationController::update');
         $routes->post('delete', 'SpecializationController::delete');
     });
