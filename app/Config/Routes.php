@@ -15,9 +15,19 @@ $routes->get('logout', [AuthController::class, 'logoutAction']);
 
 //Routes pour l'utilisateur connecté
 $routes->group('', ['filter' => 'session'], function($routes) {
+    //Routes pour la cantina
     $routes->group('cantina', function($routes) {
         $routes->get('/', 'CantinaController::index');
+        $routes->post('refresh', 'CantinaController::refresh');
+        $routes->post('recruit/(:num)', 'CantinaController::recruit/$1');
     });
+    //Routes pour l'équipage
+    $routes->group('equipage', function($routes) {
+       $routes->get('/', 'CrewController::index');
+       $routes->post('sell/(:num)', 'CrewController::sell/$1');
+       $routes->post('sell-bulk', 'CrewController::sellBulk');
+    });
+    //Routes pour le profil
 });
 
 //Routes pour l'administration
@@ -54,7 +64,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'gr
     });
     $routes->group('specialization', function ($routes) {
         $routes->get('/', 'SpecializationController::index');
-        $routes->get('create', 'SpecializationController::create');
+        $routes->post('create', 'SpecializationController::create');
         $routes->post('update', 'SpecializationController::update');
         $routes->post('delete', 'SpecializationController::delete');
     });

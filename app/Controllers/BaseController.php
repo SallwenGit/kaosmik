@@ -31,13 +31,12 @@ abstract class BaseController extends Controller
     protected array $messages = [];
 
     protected $title = "";
-    protected $title_suffix = "Kaosmik";
+    protected $title_suffix = "Kaosmiꓘ";
     protected $description = "";
     protected $author = "";
     protected $keywords = "";
     protected $current_menu = "";
     protected $layout = "front";
-
     /**
      * @return void
      */
@@ -63,6 +62,7 @@ abstract class BaseController extends Controller
         if ($flashData) {
             $datas = array_merge($datas, $flashData);
         }
+
         $headData = [
             'title' => sprintf("%s : %s", $this->title, $this->title_suffix),
             'description' => $this->description,
@@ -74,7 +74,9 @@ abstract class BaseController extends Controller
             'layout' => $this->layout,
         ];
 
-        return view('template/head', $headData).view($view, $datas,$options).view('template/footer', ['messages' => $this->messages]);
+        return view('template/head', $headData)
+            .view($view, $datas,$options)
+            .view('template/footer', ['messages' => $this->messages]);
     }
 
     protected function loadMenu() {
@@ -96,6 +98,7 @@ abstract class BaseController extends Controller
 
         return $menu;
     }
+
     public function redirect(string $url, array $data = [])
     {
         // Ajout des messages à la session si présents
@@ -111,6 +114,7 @@ abstract class BaseController extends Controller
         // Redirection avec la méthode CI4
         return redirect()->to(base_url($url));
     }
+
     /**
      * Ajoute un message de succès
      * @param string $txt Message à afficher
@@ -121,29 +125,29 @@ abstract class BaseController extends Controller
     }
 
     /**
-     * Ajoute un message de informatif
+     * Ajoute un message informatif
      * @param string $txt Message à afficher
      * @return void
      */
-    public function message($txt) {
+    public function message($txt){
         $this->messages[] = ['txt' => $txt, 'class' => 'alert-info', 'type' => 'info'];
     }
 
     /**
-     * Ajoute un message d'avertissement
+     * Ajout d'un message d'avertissement
      * @param string $txt Message à afficher
      * @return void
      */
-    public function warning($txt) {
+    public function warning($txt){
         $this->messages[] = ['txt' => $txt, 'class' => 'alert-warning', 'type' => 'warning'];
     }
 
     /**
-     * Ajoute un message d'erreur
+     * Ajout d'un message d'erreur
      * @param string $txt Message à afficher
      * @return void
      */
-    public function error($txt) {
+    public function error($txt){
         $this->messages[] = ['txt' => $txt, 'class' => 'alert-danger', 'type' => 'error'];
     }
 }

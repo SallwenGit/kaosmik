@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
+use App\Entities\Media;
 use CodeIgniter\Model;
 
-class LevelThresholdModel extends Model
+class MediaModel extends Model
 {
-    protected $table            = 'level_thresholds';
+    protected $table            = 'medias';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
+    protected $returnType       = Media::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['level','experience_required'];
+    protected $allowedFields    = ['entity_type','entity_id','name', 'url','alt','title','type'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -32,4 +33,21 @@ class LevelThresholdModel extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+
+    // Callbacks
+    protected $allowCallbacks = true;
+    protected $beforeInsert   = [];
+    protected $afterInsert    = [];
+    protected $beforeUpdate   = [];
+    protected $afterUpdate    = [];
+    protected $beforeFind     = [];
+    protected $afterFind      = [];
+    protected $beforeDelete   = [];
+    protected $afterDelete    = [];
+
+    public function getOneMedia($entity_type, $entity_id) {
+        return $this->where('entity_type', $entity_type)
+            ->where('entity_id', $entity_id)
+            ->first();
+    }
 }

@@ -31,7 +31,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($heroModels as $hm) : ?>
+                        <?php foreach ($heromodels as $hm) : ?>
                             <tr>
                                 <td><?= $hm->id; ?></td>
                                 <td><?= $hm->name; ?></td>

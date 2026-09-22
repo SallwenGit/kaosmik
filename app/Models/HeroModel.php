@@ -7,13 +7,13 @@ use CodeIgniter\Model;
 
 class HeroModel extends Model
 {
-    protected $table            = 'heros';
+    protected $table            = 'heroes';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = Hero::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['player_id', 'hero_model_id', 'rarity_id', 'name','power','cost_credit', "stamina_current" ,'stamina_max', 'last_stamina_update'];
+    protected $allowedFields    = ['player_id','hero_model_id','rarity_id','name','power','cost_credit','stamina_current','stamina_max','last_stamina_update'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -44,10 +44,4 @@ class HeroModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function getRandom(int $playerlevel = 1) {
-        return $this->where('level_required <=', $playerlevel)
-                    ->orderBy('RAND()')
-                    ->first();
-    }
 }
