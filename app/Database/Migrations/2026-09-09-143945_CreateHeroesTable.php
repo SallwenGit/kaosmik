@@ -76,6 +76,7 @@ class CreateHeroesTable extends Migration
         $this->forge->addForeignKey('player_id', 'players', 'id');
         $this->forge->addForeignKey('hero_model_id', 'hero_models', 'id');
         $this->forge->addForeignKey('rarity_id', 'rarity_levels', 'id');
+        $this->forge->createTable('heroes');
     }
 
     public function down()

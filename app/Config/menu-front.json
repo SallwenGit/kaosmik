@@ -4,5 +4,10 @@
     "url" : "/cantina",
     "icon" : "",
     "class": ""
+  },
+  "crew" : {
+    "title" : "Equipage",
+    "url" : "/equipage",
+    "icon" : "<i class=\"fa-solid fa-users\"></i>"
   }
 }

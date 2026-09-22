@@ -15,10 +15,17 @@ $routes->get('logout', [AuthController::class, 'logoutAction']);
 
 //Routes pour l'utilisateur connecté
 $routes->group('', ['filter' => 'session'], function($routes) {
+    //Routes pour la cantina
     $routes->group('cantina', function($routes) {
         $routes->get('/', 'CantinaController::index');
         $routes->post('refresh', 'CantinaController::refresh');
-        $routes->post('recrute/(:num)', 'CantinaController::recrute/$1');
+        $routes->post('recruit/(:num)', 'CantinaController::recruit/$1');
+    });
+    //Routes pour l'équipage
+    $routes->group('equipage', function($routes) {
+       $routes->get('/', 'CrewController::index');
+       $routes->post('sell/(:num)', 'CrewController::sell/$1');
+       $routes->post('sell-bulk', 'CrewController::sellBulk');
     });
     //Routes pour le profil
 });

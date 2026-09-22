@@ -12,14 +12,7 @@ class CantinaModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = Cantina::class;
     protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
     protected $allowedFields    = ['player_id','hero_model_id','rarity_id','name','power','cost_credit'];
-
-    protected bool $allowEmptyInserts = false;
-    protected bool $updateOnlyChanged = true;
-
-    protected array $casts = [];
-    protected array $castHandlers = [];
 
     // Dates
     protected $useTimestamps = true;
