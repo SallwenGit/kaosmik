@@ -1,12 +1,14 @@
-<div class="card h-100 border border-3 js-hero-card"
+<div class="card h-100 border border-3 js-hero-card shadow"
      style="border-color: <?= $character->getRarity()->color; ?>!important"
-    data-id="<?= $character->id; ?>"
-    data-sell-price="<?= (int) $character->cost_credit / 2; ?>"
+     data-id="<?= $character->id; ?>"
+     data-sell-price="<?= (int) $character->cost_credit / 2; ?>"
+     data-power="<?= $character->power; ?>"
+     data-stamina="<?= $character->stamina_current; ?>"
+     data-specialization="<?= $character->getHeroModel()->getSpecialization()['id']; ?>"
 >
     <div class="position-absolute top-0 start-0 m-3 d-none js-bulk-checkbox-container" style="z-index: 10;">
         <input type="checkbox" class="form-check-input js-hero-select" style="transform: scale(1.5); cursor: pointer;">
     </div>
-
     <img class="card-img-top"
          src="<?= (isset($character) && $character->getHeroModel()->getImage()) ? $character->getHeroModel()->getImage()->getUrl() : base_url('/assets/img/no-img.png'); ?>"
     >
@@ -39,21 +41,31 @@
             </div>
         <?php endif; ?>
     </div>
-    <?php if($context == 'cantina') : ?>
+    <?php if($character instanceof \App\Entities\Hero) : ?>
+        <div class="progress" style="height: 20px;">
+            <div class="progress-bar bg-kaosmik"
+                 style="width:<?= ($character->stamina_current / $character->stamina_max) * 100; ?>%;"
+            >
+                <?= $character->stamina_current; ?>
+            </div>
+        </div>
 
+    <?php endif; ?>
+    <?php if($context == 'cantina') : ?>
         <?php if (auth()->user()->getPlayer()->isFleetFull()) : ?>
             <span class="mb-1 badge text-bg-danger">Equipage complet</span>
         <?php endif; ?>
         <?= form_open('cantina/recruit/' . $character->id); ?>
-            <div class="d-grid">
-                <button type="submit" class="btn btn-kaosmik"
-                        <?= ($character->cost_credit > auth()->user()->getPlayer()->credits) || (auth()->user()->getPlayer()->isFleetFull()) ? 'disabled' : ''; ?>>
-                    Recruter ( <i class="fa-solid fa-cent-sign"></i><?= $character->cost_credit; ?> )
-                </button>
-            </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-kaosmik"
+                    <?= ($character->cost_credit > auth()->user()->getPlayer()->credits) || (auth()->user()->getPlayer()->isFleetFull()) ? 'disabled' : ''; ?>
+            >
+                Recruter ( <i class="fa-solid fa-cent-sign"></i><?= $character->cost_credit; ?> )
+            </button>
+        </div>
         <?= form_close(); ?>
     <?php elseif ($context == 'crew') : ?>
-        <?= form_open('equipage/sell/' . $character->id, ['class' => 'js-form-sell js-single-form-sell']); ?>
+        <?= form_open('equipage/sell/' . $character->id, ['class' => 'js-form-sell js-single-sell-form']); ?>
         <div class="d-grid">
             <button type="submit" class="btn btn-danger" data-hero-name="<?= $character->name; ?>">
                 Licencier pour ( <i class="fa-solid fa-cent-sign"></i><?= (int) ($character->cost_credit / 2); ?> )
@@ -61,7 +73,7 @@
         </div>
         <?= form_close(); ?>
     <?php endif; ?>
-    <div class="ribbon" style="background-color: <?= $character->getRarity()->color; ?>">
-        <?= $character->getRarity()->name; ?>
+    <div class="ribbon">
+        <?= $character->getHeroModel()->getSpecialization()['name']; ?>
     </div>
 </div>

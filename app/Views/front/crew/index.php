@@ -18,7 +18,7 @@
         </button>
     </div>
 </div>
-<div class="row row-cols-6 g-3">
+<div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
     <?php
     foreach($logged_user->getPlayer()->getHeroes() as $hero) : ?>
         <div class="col">
@@ -29,7 +29,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         //Gestion de la confirmation pour la vente INDIVIDUELLE
-        document.querySelectorAll('.js-single-form-sell').forEach(form => {
+        document.querySelectorAll('.js-single-sell-form').forEach(form => {
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const btn = this.querySelector('button[type="submit"]');
@@ -74,7 +74,7 @@
                toggleBtn.classList.replace('btn-warning', 'btn-outline-danger');
                toggleBtn.textContent = 'Licencier en masse';
 
-               //Décocher toute les cases
+               //Décocher toutes les cases
                document.querySelectorAll('.js-hero-select').forEach(el => {
                    el.checked = false;
                });
