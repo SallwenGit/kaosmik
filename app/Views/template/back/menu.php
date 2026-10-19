@@ -22,7 +22,10 @@
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="<?= base_url('logout'); ?>">
-                            Se deconnecter
+                            Se déconnecter
+                        </a>
+                        <a class="dropdown-item" href="<?= base_url('chat'); ?>">
+                            Voir la messagerie
                         </a>
                         <a class="dropdown-item" href="<?= base_url(); ?>">
                             Voir le site

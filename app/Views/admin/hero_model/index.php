@@ -1,4 +1,4 @@
-<div class="row alig-items-center">
+<div class="row align-items-center">
     <div class="col">
         <div class="page-title">Liste des modèles pour les héros</div>
     </div>
