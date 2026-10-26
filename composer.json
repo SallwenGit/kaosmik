@@ -17,7 +17,7 @@
     "require-dev": {
         "fakerphp/faker": "^1.9",
         "mikey179/vfsstream": "^1.6",
-        "phpunit/phpunit": "^10.5.16"
+        "phpunit/phpunit": "^10.5"
     },
     "autoload": {
         "psr-4": {
@@ -39,6 +39,11 @@
         "sort-packages": true
     },
     "scripts": {
-        "test": "phpunit"
+        "test": "phpunit",
+        "test:unit": "phpunit tests/unit",
+        "test:database": "phpunit tests/database/",
+        "test:feature": "phpunit tests/feature/",
+        "test:coverage": "phpunit --coverage-html build/coverage",
+        "test:filter": "phpunit --filter"
     }
 }
