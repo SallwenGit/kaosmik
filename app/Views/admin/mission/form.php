@@ -1,11 +1,11 @@
 <?php
 // [préfixe du champ, libellé min, libellé max, icône]
 $rangeFields = [
-    ['power_required', 'Puissance requise minimale', 'Puissance requise maximale', 'fa-hand-fist'],
-    ['stamina_cost', 'Coût en endurance minimum', 'Coût en endurance maximum', 'fa-bolt'],
-    ['credits_reward', 'Récompense en crédits minimum', 'Récompense en crédits maximum', 'fa-cent-sign'],
-    ['energy_reward', 'Récompense en énergie minimum', 'Récompense en énergie maximum', 'fa-atom'],
-    ['experience_reward', 'Récompense en expérience minimum', 'Récompense en expérience maximum', 'fa-star'],
+        ['power_required', 'Puissance requise minimale', 'Puissance requise maximale', 'fa-hand-fist'],
+        ['stamina_cost', 'Coût en endurance minimum', 'Coût en endurance maximum', 'fa-bolt'],
+        ['credits_reward', 'Récompense en crédits minimum', 'Récompense en crédits maximum', 'fa-cent-sign'],
+        ['energy_reward', 'Récompense en énergie minimum', 'Récompense en énergie maximum', 'fa-atom'],
+        ['experience_reward', 'Récompense en expérience minimum', 'Récompense en expérience maximum', 'fa-star'],
 ];
 ?>
 <div class="row align-items-center mb-3">
@@ -42,8 +42,8 @@ $rangeFields = [
                     <select name="specialization_ids[]" class="form-select" multiple>
                         <?php foreach( $specializations as $spe): ?>
                             <option
-                                value="<?= $spe['id']; ?>"
-                                <?= in_array($spe['id'], $selectedSpecializations) ? 'selected' : ''; ?>
+                                    value="<?= $spe['id']; ?>"
+                                    <?= in_array($spe['id'], $selectedSpecializations) ? 'selected' : ''; ?>
                             >
                                 <?= esc($spe['name']); ?>
                             </option>
@@ -67,6 +67,15 @@ $rangeFields = [
                             <i class="fa-solid fa-people-group"></i>
                         </span>
                         <input type="number" name="team_size_max" class="form-control" placeholder="Taille maximale de l'équipe" title="Taille maximale de l'équipe" min="1" value="<?= isset($mission) ? $mission->team_size_max : ''?>">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Durée de la mission (en secondes)</label>
+                    <div class="input-icon">
+                        <span class="input-icon-addon">
+                            <i class="fa-solid fa-hourglass-half"></i>
+                        </span>
+                        <input type="number" name="duration" class="form-control" placeholder="Durée en secondes" title="Durée en secondes" min="0" value="<?= isset($mission) ? $mission->duration : '60' ?>" required>
                     </div>
                 </div>
                 <?php foreach ($rangeFields as [$prefix, $labelMin, $labelMax, $icon]) : ?>

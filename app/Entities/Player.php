@@ -93,15 +93,15 @@ class Player extends Entity
             return $this->mission_resolutions;
         }
         $missionResolutionModel = model('MissionResolutionModel');
-        $this->mission_resolutions = $missionResolutionModel->where('player_id', $this->attributes['id'])->orderBy('created_at','DESC')->findAll();
+        $this->mission_resolutions = $missionResolutionModel->where('player_id', $this->attributes['id'])->where('resolved_at IS NOT NULL')->orderBy('created_at', 'DESC')->findAll();
         return $this->mission_resolutions;
     }
 
     public function isFleetFull() {
-        if ($this->attributes['fleet_capacity'] >= count($this->getHeroes())) {
-            return false;
+        if ( $this->attributes['fleet_capacity'] <= count($this->getHeroes())) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public function getTotalPower() {
