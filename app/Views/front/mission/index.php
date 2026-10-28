@@ -6,9 +6,48 @@
         </div>
     </div>
     <div class="col-auto ms-auto">
-        <a href="<?= base_url('mon-profil/mes-anciennes-missions');?>" class="btn btn-sm btn-outline-kaosmik">Historique</a>
+        <a href="<?= base_url('mon-profil/mes-anciennes-missions') ?>" class="btn btn-sm btn-outline-kaosmik">Historique</a>
     </div>
 </div>
+<?php if(!empty($inProgress)) : ?>
+    <div class="row mb-3">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <span class="h2">Mission en cours</span>
+                    </div>
+                    <div class="row row-cols-2 row-cols-md-4">
+                        <?php foreach($inProgress as $mr) : ?>
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <div class="card-title">
+                                            <span><?= esc($mr->getMission()->title);?></span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <div class="avatar-list avatar-list-stacked">
+                                                <?php foreach($mr->getHeroes() as $hero) : ?>
+                                                    <span title="<?= $hero->name; ?>" data-bs-toggle="tooltip" data-bs-placement="right" class="avatar avatar-sm"
+                                                          style="background-image: url(<?= (isset($hero) && $hero->getHeroModel()->getImage()) ? $hero->getHeroModel()->getImage()->getUrl() : base_url('/assets/img/no-img.png'); ?>)">
+                                    </span>
+                                                <?php endforeach; ?>
+                                            </div>
+                                            <span class="badge text-bg-warning js-countdown" data-ends-at="<?= $mr->ends_at->getTimestamp(); ?>">...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php endforeach; ?>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
 <div class="row">
     <div class="col-md-9 mb-3">
         <div class="card">
@@ -107,6 +146,7 @@
         const mission_container = document.getElementById('mission-container');
         const mission_list = document.getElementById('mission-list');
         const input_mission_id = document.getElementById('form-mission-id');
+        const countdowns = document.querySelectorAll('.js-countdown');
 
         mission_list.addEventListener('click', async (e) => {
             //remonte à partir du click à la div .js-mission la plus proche
@@ -144,5 +184,17 @@
                 `;
             }
         })
+
+        function tick() {
+            const now = Math.floor(Date.now() / 1000);
+            countdowns.forEach(el => {
+                const left = parseInt(el.dataset.endsAt) - now;
+                if (left <= 0) { location.reload(); return;}
+                const m = Math.floor(left/60);
+                const s = left % 60;
+                el.textContent = `${m} min ${String(s).padStart(2, '0')} s`;
+            });
+        }
+        if(countdowns.length) { tick(); setInterval(tick, 1000); }
     });
 </script>

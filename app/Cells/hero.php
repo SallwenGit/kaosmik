@@ -28,7 +28,11 @@
             $max = $character->getHeroModel()->power_max * $character->getRarity()->power_multiplier;
 
             $total = $max - $min;
-            $vert = ( ($current -$min) / $total ) * 100;
+            if ($total == 0) {
+                $vert = ($current >= $max) ? 100: 0;
+            } else {
+                $vert = ( ($current -$min) / $total ) * 100;
+            }
             $rouge = 100 - $vert;
             ?>
             <div class="d-flex mt-3">
